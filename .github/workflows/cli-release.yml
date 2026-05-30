@@ -327,9 +327,9 @@ jobs:
           output="${{ env.BINARY_NAME }}-${VERSION}-${{ matrix.artifact_suffix }}"
 
           go build -trimpath -ldflags="-w -s \
-            -X github.com/javinizer/javinizer-go/internal/version.Version=${VERSION} \
-            -X github.com/javinizer/javinizer-go/internal/version.Commit=${COMMIT} \
-            -X github.com/javinizer/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Version=${VERSION} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Commit=${COMMIT} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
             -o "dist/${output}" ./cmd/javinizer
 
       - name: Upload artifact
@@ -389,15 +389,15 @@ jobs:
           mkdir -p dist
 
           GOOS=darwin GOARCH=amd64 go build -trimpath -ldflags="-w -s \
-            -X github.com/javinizer/javinizer-go/internal/version.Version=${VERSION} \
-            -X github.com/javinizer/javinizer-go/internal/version.Commit=${COMMIT} \
-            -X github.com/javinizer/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Version=${VERSION} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Commit=${COMMIT} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
             -o "dist/${{ env.BINARY_NAME }}-${VERSION}-darwin-amd64" ./cmd/javinizer
 
           GOOS=darwin GOARCH=arm64 go build -trimpath -ldflags="-w -s \
-            -X github.com/javinizer/javinizer-go/internal/version.Version=${VERSION} \
-            -X github.com/javinizer/javinizer-go/internal/version.Commit=${COMMIT} \
-            -X github.com/javinizer/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Version=${VERSION} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.Commit=${COMMIT} \
+            -X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
             -o "dist/${{ env.BINARY_NAME }}-${VERSION}-darwin-arm64" ./cmd/javinizer
 
       - name: Create universal binary
@@ -471,7 +471,7 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           $output = "${{ env.BINARY_NAME }}-$env:VERSION-windows-amd64.exe"
-          go build -trimpath -ldflags "-w -s -X github.com/javinizer/javinizer-go/internal/version.Version=$env:VERSION -X github.com/javinizer/javinizer-go/internal/version.Commit=$env:COMMIT -X github.com/javinizer/javinizer-go/internal/version.BuildDate=$env:BUILD_DATE" -o "dist/$output" ./cmd/javinizer
+          go build -trimpath -ldflags "-w -s -X github.com/fedora-oss/javinizer-go/internal/version.Version=$env:VERSION -X github.com/fedora-oss/javinizer-go/internal/version.Commit=$env:COMMIT -X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=$env:BUILD_DATE" -o "dist/$output" ./cmd/javinizer
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6

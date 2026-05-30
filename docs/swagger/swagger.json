@@ -7,10 +7,10 @@
     "info": {
         "description": "REST API for JAV metadata scraping and file organization",
         "title": "Javinizer API",
-        "termsOfService": "https://github.com/javinizer/javinizer-go",
+        "termsOfService": "https://github.com/fedora-oss/javinizer-go",
         "contact": {
             "name": "API Support",
-            "url": "https://github.com/javinizer/javinizer-go/issues"
+            "url": "https://github.com/fedora-oss/javinizer-go/issues"
         },
         "license": {
             "name": "MIT",

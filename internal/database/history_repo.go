@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 type HistoryRepository struct {
@@ -76,7 +76,9 @@ func (r *HistoryRepository) FindRecent(limit int) ([]models.History, error) {
 
 func (r *HistoryRepository) FindByDateRange(start, end time.Time) ([]models.History, error) {
 	var history []models.History
-	err := r.GetDB().Where("datetime(created_at) BETWEEN datetime(?) AND datetime(?)", start.Format(SqliteTimeFormat), end.Format(SqliteTimeFormat)).Order("created_at DESC").Find(&history).Error
+	// Use the dialect helper so the query works on SQLite, PostgreSQL, and MySQL.
+	clause, args := r.GetDB().Dialect.BetweenDateTimeExpr("created_at", start, end)
+	err := r.GetDB().Where(clause, args...).Order("created_at DESC").Find(&history).Error
 	if err != nil {
 		return nil, wrapDBErr("find", "history by date range", err)
 	}
@@ -117,7 +119,9 @@ func (r *HistoryRepository) DeleteByMovieID(movieID string) error {
 }
 
 func (r *HistoryRepository) DeleteOlderThan(date time.Time) error {
-	if err := r.GetDB().Where("datetime(created_at) < datetime(?)", date.Format(SqliteTimeFormat)).Delete(&models.History{}).Error; err != nil {
+	// Use the dialect helper so the query works on SQLite, PostgreSQL, and MySQL.
+	clause, args := r.GetDB().Dialect.BeforeDateTimeExpr("created_at", date)
+	if err := r.GetDB().Where(clause, args...).Delete(&models.History{}).Error; err != nil {
 		return wrapDBErr("delete", "history older than date", err)
 	}
 	return nil

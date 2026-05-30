@@ -4,8 +4,8 @@ Javinizer Go is a metadata scraper and file organizer for Japanese Adult Videos 
 
 [![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)](https://go.dev)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Test & Coverage](https://github.com/javinizer/javinizer-go/actions/workflows/test.yml/badge.svg)](https://github.com/javinizer/javinizer-go/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/javinizer/javinizer-go/branch/main/graph/badge.svg)](https://codecov.io/gh/javinizer/javinizer-go)
+[![Test & Coverage](https://github.com/fedora-oss/javinizer-go/actions/workflows/test.yml/badge.svg)](https://github.com/fedora-oss/javinizer-go/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/fedora-oss/javinizer-go/branch/main/graph/badge.svg)](https://codecov.io/gh/fedora-oss/javinizer-go)
 [![Discord](https://img.shields.io/discord/608449512352120834?color=brightgreen&style=plastic&label=discord)](https://discord.gg/Pds7xCpzpc)
 
 ## Features
@@ -48,7 +48,7 @@ The easiest way to get started is with Docker:
 # 1) Create data directory and download config
 mkdir -p ./data
 curl -o ./data/config.yaml \
-  https://raw.githubusercontent.com/javinizer/javinizer-go/main/configs/config.yaml.example
+  https://raw.githubusercontent.com/fedora-oss/javinizer-go/main/configs/config.yaml.example
 
 # 2) Edit config.yaml with your settings (scrapers, output paths, etc.)
 
@@ -58,7 +58,7 @@ docker run --rm \
   -p 8080:8080 \
   -v "$(pwd)/data:/javinizer" \
   -v "/path/to/your/media:/media" \
-  ghcr.io/javinizer/javinizer-go:latest
+  ghcr.io/fedora-oss/javinizer-go:latest
 ```
 
 Open [http://localhost:8080](http://localhost:8080) to access the web UI.
@@ -71,34 +71,46 @@ Open [http://localhost:8080](http://localhost:8080) to access the web UI.
 
 ### Docker Compose
 
-For a more complete setup with optional FlareSolverr support:
+For a more complete setup with optional FlareSolverr and PostgreSQL/MySQL support:
 
 ```bash
 # 1) Download example files
 curl -o .env \
-  https://raw.githubusercontent.com/javinizer/javinizer-go/main/.env.example
+  https://raw.githubusercontent.com/fedora-oss/javinizer-go/main/.env.example
 curl -o docker-compose.yml \
-  https://raw.githubusercontent.com/javinizer/javinizer-go/main/docker-compose.yml
+  https://raw.githubusercontent.com/fedora-oss/javinizer-go/main/docker-compose.yml
 
-# 2) Edit .env to configure paths and settings
-# MEDIA_PATH=/path/to/your/jav-library
-# PUID=1000
-# PGID=1000
-# TZ=America/New_York
+# 2) Edit .env (paths, passwords, timezone)
+vim .env
 
-# 3) Start services
-docker-compose up -d
+# 3) Start with your chosen database backend
+docker compose up -d                        # SQLite (default, no extra container)
+docker compose --profile postgres up -d     # PostgreSQL
+docker compose --profile mysql up -d        # MySQL / MariaDB
+
+# 4) Combine profiles as needed
+docker compose --profile postgres --profile flaresolverr up -d
 ```
 
-The `docker-compose.yml` includes:
-- **javinizer**: Main API server + web UI
-- **flaresolverr** (optional): Cloudflare challenge solver for JavDB/JavLibrary
+The `docker-compose.yml` includes these profiles:
 
-See [Docker Deployment Guide](./docs/docker-deployment.md) for complete documentation.
+| Profile | Services started | When to use |
+|---------|-----------------|-------------|
+| *(none)* | `javinizer` (SQLite) | Default — embedded DB, zero config |
+| `postgres` | `javinizer-postgres` + `postgres` | External PostgreSQL 16 |
+| `mysql` | `javinizer-mysql` + `mysql` | External MySQL 8 / MariaDB |
+| `flaresolverr` | `flaresolverr` | JavDB/JavLibrary Cloudflare bypass |
+| `dev` | `javinizer-dev` | Source build + frontend hot-reload |
+
+> **Tip:** Postgres and MySQL containers persist data in named Docker volumes
+> (`postgres_data`, `mysql_data`). Data survives `docker compose down` but is
+> removed by `docker compose down -v`.
+
+See [Database Guide](#database) below for configuration details.
 
 ### Prebuilt Binaries
 
-Download pre-compiled binaries from [GitHub Releases](https://github.com/javinizer/javinizer-go/releases):
+Download pre-compiled binaries from [GitHub Releases](https://github.com/fedora-oss/javinizer-go/releases):
 
 **Available platforms:**
 - `linux-amd64` - Linux x86_64
@@ -111,7 +123,7 @@ Download pre-compiled binaries from [GitHub Releases](https://github.com/javiniz
 **Installation:**
 ```bash
 # Example for Linux amd64
-wget https://github.com/javinizer/javinizer-go/releases/download/v0.1.2-alpha/javinizer-linux-amd64.tar.gz
+wget https://github.com/fedora-oss/javinizer-go/releases/download/v0.1.2-alpha/javinizer-linux-amd64.tar.gz
 tar -xzf javinizer-linux-amd64.tar.gz
 sudo mv javinizer /usr/local/bin/
 javinizer version
@@ -124,10 +136,10 @@ javinizer version
 Requires Go 1.25+ and CGO (for SQLite support). For embedded web UI builds, Node.js 20+ is also required (Node 22 used in CI).
 
 ```bash
-go install github.com/javinizer/javinizer-go/cmd/javinizer@latest
+go install github.com/fedora-oss/javinizer-go/cmd/javinizer@latest
 
 # Or clone and build manually (single binary with embedded web UI)
-git clone https://github.com/javinizer/javinizer-go.git
+git clone https://github.com/fedora-oss/javinizer-go.git
 cd javinizer-go
 make build
 ./bin/javinizer version
@@ -263,7 +275,7 @@ The web application provides a modern interface for managing your JAV library.
 **How to access:**
 ```bash
 # Using Docker (recommended)
-docker run -p 8080:8080 -v ./data:/javinizer ghcr.io/javinizer/javinizer-go:latest
+docker run -p 8080:8080 -v ./data:/javinizer ghcr.io/fedora-oss/javinizer-go:latest
 # Open http://localhost:8080
 ```
 
@@ -274,7 +286,20 @@ docker run -p 8080:8080 -v ./data:/javinizer ghcr.io/javinizer/javinizer-go:late
 - **Jobs** - Monitor active batch jobs and progress in real-time
 - **Actresses** - Browse actress database with images
 - **History** - View and rollback organization operations
-- **Settings** - Configure scrapers, output templates, and proxy settings
+- **Settings** - Configure scrapers, output templates, proxy settings, **and database backend**
+
+### Configuring the Database via Web UI
+
+Open **Settings → Database** to change the active backend without editing `config.yaml` manually:
+
+1. Select **Backend**: SQLite · PostgreSQL · MySQL
+2. Fill in the **DSN** field (shown below per backend)
+3. Optionally configure **connection pool** limits (max open/idle connections, lifetime)
+4. Click **Save & Reconnect** — the server applies the new settings and runs migrations automatically
+
+> **SQLite DSN** (default): Leave empty or enter a path like `/javinizer/javinizer.db`  
+> **PostgreSQL DSN**: `host=localhost user=jav password=secret dbname=jav sslmode=disable`  
+> **MySQL DSN**: `jav:secret@tcp(localhost:3306)/jav?parseTime=True&loc=UTC`
 
 **API Documentation:**
 - **Scalar UI**: [http://localhost:8080/docs](http://localhost:8080/docs) - Interactive API documentation
@@ -282,7 +307,35 @@ docker run -p 8080:8080 -v ./data:/javinizer ghcr.io/javinizer/javinizer-go:late
 
 See [API Reference](./docs/07-api-reference.md) for endpoint documentation.
 
-### Web Development
+## Development
+
+### Local dev environment script
+
+A single script manages the full local workflow:
+
+```bash
+# SQLite (fastest — no Docker needed)
+./scripts/dev-env.sh start
+
+# PostgreSQL (starts Docker container, connects Go server to it)
+./scripts/dev-env.sh start postgres
+
+# MySQL
+./scripts/dev-env.sh start mysql
+
+# Show running services
+./scripts/dev-env.sh status
+
+# Stop all Docker services
+./scripts/dev-env.sh stop
+
+# Wipe volumes and restart fresh
+./scripts/dev-env.sh reset postgres
+```
+
+**Requirements:** Go 1.25+, Docker (for postgres/mysql only), optionally Node.js 20+ for frontend hot-reload.
+
+### Web UI Development
 
 To build and use the web UI with a local installation:
 
@@ -326,12 +379,23 @@ Docker deployments support environment variable overrides:
 | `USER_ID` | Legacy alias for `PUID` | `1000` | `1000` |
 | `GROUP_ID` | Legacy alias for `PGID` | `1000` | `1000` |
 | `JAVINIZER_CONFIG` | Path to config file | `/javinizer/config.yaml` | `/custom/config.yaml` |
-| `JAVINIZER_DB` | Path to SQLite database | `/javinizer/javinizer.db` | `/custom/db.db` |
+| `JAVINIZER_DB` | Path to SQLite database file | `/javinizer/javinizer.db` | `/custom/db.db` |
 | `JAVINIZER_LOG_DIR` | Relocate file targets from `logging.output` to this directory (does not enable file logging by itself) | `/javinizer/logs` | `/custom/logs` |
 | `JAVINIZER_TEMP_DIR` | Temp directory for downloads | `data/temp` | `/custom/temp` |
 | `LOG_LEVEL` | Logging verbosity | `info` | `debug`, `warn`, `error` |
 | `UMASK` | File permission mask | `002` | `022` (owner-only write) |
 | `TZ` | Timezone for logs | `UTC` | `America/New_York` |
+
+### Database Variables
+
+| Variable | Description | Default |
+|----------|--------------|---------|
+| `JAVINIZER_DB_TYPE` | Database backend: `sqlite`, `postgres`, `mysql` | `sqlite` |
+| `JAVINIZER_DB_DSN` | DSN string (required for postgres/mysql, ignored for sqlite) | *(empty)* |
+| `JAVINIZER_DB` | SQLite file path (only used when `DB_TYPE=sqlite`) | `/javinizer/javinizer.db` |
+| `JAVINIZER_DB_MAX_OPEN_CONNS` | Max open connections (0 = driver default) | `0` |
+| `JAVINIZER_DB_MAX_IDLE_CONNS` | Max idle connections (0 = driver default) | `0` |
+| `JAVINIZER_DB_CONN_MAX_LIFETIME` | Connection recycle interval in seconds (0 = unlimited) | `0` |
 
 ### Translation API Keys
 
@@ -370,7 +434,7 @@ docker run --rm \
   -p 9000:8080 \
   -v "$(pwd)/data:/javinizer" \
   -v "/media/jav:/media" \
-  ghcr.io/javinizer/javinizer-go:latest
+  ghcr.io/fedora-oss/javinizer-go:latest
 ```
 
 See `.env.example` for Docker Compose configuration.
@@ -385,6 +449,7 @@ Javinizer uses a YAML configuration file to control scrapers, output templates, 
 - **Output**: Folder/file naming templates, download options
 - **File Matching**: Extensions, size filters, regex patterns
 - **NFO**: Kodi/Plex metadata format options
+- **Database**: Backend type, DSN, connection pool settings
 
 **Documentation:**
 - [Configuration Guide](./docs/02-configuration.md) - Detailed option reference
@@ -395,6 +460,70 @@ Javinizer uses a YAML configuration file to control scrapers, output templates, 
 **Initialize config:**
 ```bash
 javinizer init  # Creates default config.yaml in current directory
+```
+
+## Database
+
+Javinizer supports three database backends. The default is **SQLite** (embedded, zero config).
+
+### SQLite (default)
+
+No configuration needed. The database file lives at the path set by `JAVINIZER_DB`:
+
+```yaml
+# config.yaml
+database:
+  type: sqlite
+  dsn: /javinizer/javinizer.db
+  log_level: silent
+```
+
+### PostgreSQL
+
+Requires a running PostgreSQL server (use the `postgres` Compose profile or point to an existing server):
+
+```yaml
+# config.yaml
+database:
+  type: postgres
+  dsn: "host=localhost user=javinizer password=changeme dbname=javinizer sslmode=disable TimeZone=UTC"
+  log_level: warn
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 300   # seconds
+```
+
+### MySQL / MariaDB
+
+> **Important:** Include `parseTime=True&loc=UTC` in the DSN — GORM requires it to map `DATETIME` columns to `time.Time`.
+
+```yaml
+# config.yaml
+database:
+  type: mysql
+  dsn: "javinizer:changeme@tcp(localhost:3306)/javinizer?parseTime=True&loc=UTC&charset=utf8mb4"
+  log_level: warn
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 300
+```
+
+### Via Web UI
+
+Go to **Settings → Database** to switch backends live:
+1. Select backend type
+2. Enter DSN
+3. Click **Save & Reconnect** — migrations run automatically
+
+### Via Environment Variables (Docker)
+
+```bash
+# PostgreSQL example
+docker run -p 8080:8080 \
+  -e JAVINIZER_DB_TYPE=postgres \
+  -e JAVINIZER_DB_DSN="host=mydb user=jav password=secret dbname=jav sslmode=disable" \
+  -v ./data:/javinizer \
+  ghcr.io/fedora-oss/javinizer-go:latest
 ```
 
 ## Multi-Language Template Tags
@@ -446,8 +575,8 @@ See [Template System](./docs/04-template-system.md) for full documentation.
 
 ## Support
 
-- **Issues**: [github.com/javinizer/javinizer-go/issues](https://github.com/javinizer/javinizer-go/issues)
-- **Discussions**: [github.com/javinizer/javinizer-go/discussions](https://github.com/javinizer/javinizer-go/discussions)
+- **Issues**: [github.com/fedora-oss/javinizer-go/issues](https://github.com/fedora-oss/javinizer-go/issues)
+- **Discussions**: [github.com/fedora-oss/javinizer-go/discussions](https://github.com/fedora-oss/javinizer-go/discussions)
 
 ## License
 

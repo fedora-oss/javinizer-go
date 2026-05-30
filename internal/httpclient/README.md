@@ -18,7 +18,7 @@ For scrapers that don't need browser capabilities:
 ```go
 import (
     "github.com/go-resty/resty/v2"
-    "github.com/javinizer/javinizer-go/internal/httpclient"
+    "github.com/fedora-oss/javinizer-go/internal/httpclient"
 )
 
 func NewHTTPClient(cfg *config.ScraperSettings, globalProxy *config.ProxyConfig, globalFlareSolverr config.FlareSolverrConfig) (*resty.Client, error) {
@@ -40,7 +40,7 @@ For scrapers that need FlareSolverr to bypass Cloudflare/browser challenges:
 ```go
 import (
     "github.com/go-resty/resty/v2"
-    "github.com/javinizer/javinizer-go/internal/httpclient"
+    "github.com/fedora-oss/javinizer-go/internal/httpclient"
 )
 
 func NewHTTPClient(cfg *config.ScraperSettings, globalProxy *config.ProxyConfig, globalFlareSolverr config.FlareSolverrConfig) (*resty.Client, *httpclient.FlareSolverr, error) {
@@ -61,8 +61,8 @@ For scrapers that need to pass proxy configuration to browser automation:
 ```go
 import (
     "github.com/go-resty/resty/v2"
-    "github.com/javinizer/javinizer-go/internal/httpclient"
-    "github.com/javinizer/javinizer-go/internal/config"
+    "github.com/fedora-oss/javinizer-go/internal/httpclient"
+    "github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 func NewHTTPClient(cfg *config.ScraperSettings, globalProxy *config.ProxyConfig, globalFlareSolverr config.FlareSolverrConfig) (*resty.Client, *config.ProxyProfile, error) {

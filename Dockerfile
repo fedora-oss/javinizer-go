@@ -45,21 +45,27 @@ COPY . .
 COPY --from=frontend-builder /frontend/build ./web/dist
 
 # Build binary with optimizations and version injection
-# CGO_ENABLED=1 required for SQLite
+# CGO_ENABLED=1 is required for SQLite (default).
+# Set DB_TYPE=postgres or DB_TYPE=mysql to build a pure-Go binary
+# (no SQLite, no CGO, smaller image, fully static).
 ARG VERSION=dev
 ARG COMMIT=unknown
 ARG BUILD_DATE=unknown
+ARG DB_TYPE=sqlite
 
+# Select CGO mode based on DB_TYPE at build time.
+# SQLite requires CGO; Postgres and MySQL use pure-Go drivers.
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
-    CGO_ENABLED=1 GOOS=linux \
+    CGO_ENABLED=$([ "${DB_TYPE}" = "sqlite" ] && echo 1 || echo 0) \
+    GOOS=linux \
     CGO_CFLAGS="-D_LARGEFILE64_SOURCE" \
     go build \
-    -tags sqlite_omit_load_extension \
+    -tags "$([ "${DB_TYPE}" = "sqlite" ] && echo 'sqlite_omit_load_extension' || echo '')" \
     -ldflags="-w -s \
-    -X github.com/javinizer/javinizer-go/internal/version.Version=${VERSION} \
-    -X github.com/javinizer/javinizer-go/internal/version.Commit=${COMMIT} \
-    -X github.com/javinizer/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
+    -X github.com/fedora-oss/javinizer-go/internal/version.Version=${VERSION} \
+    -X github.com/fedora-oss/javinizer-go/internal/version.Commit=${COMMIT} \
+    -X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=${BUILD_DATE}" \
     -o javinizer \
     ./cmd/javinizer
 
@@ -71,27 +77,32 @@ FROM alpine:3.21
 ARG VERSION=dev
 ARG COMMIT=unknown
 ARG BUILD_DATE=unknown
+# Propagate DB_TYPE into runtime image for startup validation
+ARG DB_TYPE=sqlite
 
 LABEL maintainer="javinizer@example.com" \
       description="JAV metadata scraper and organizer" \
       org.opencontainers.image.title="Javinizer" \
       org.opencontainers.image.description="JAV metadata scraper and organizer" \
-      org.opencontainers.image.source="https://github.com/javinizer/javinizer-go" \
+      org.opencontainers.image.source="https://github.com/fedora-oss/javinizer-go" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.revision="${COMMIT}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
-      version="${VERSION}"
+      version="${VERSION}" \
+      db.type="${DB_TYPE}"
 
 # Working directory is now /javinizer (app state location)
 WORKDIR /javinizer
 
-# Install runtime dependencies including Chromium for browser automation
+# Install runtime dependencies including Chromium for browser automation.
+# postgresql-client provides pg_isready for health checks when DB_TYPE=postgres.
 RUN apk add --no-cache \
     ca-certificates \
     tzdata \
     sqlite \
     su-exec \
     wget \
+    postgresql-client \
     chromium \
     nss \
     freetype \
@@ -135,6 +146,10 @@ ENV JAVINIZER_HOME=/javinizer \
     JAVINIZER_INIT_ALLOWED_ORIGINS="http://localhost:8080,http://localhost:5173,http://127.0.0.1:8080,http://127.0.0.1:5173" \
     JAVINIZER_IMAGE_DEFAULT_UID=${USER_ID} \
     JAVINIZER_IMAGE_DEFAULT_GID=${GROUP_ID} \
+    # DB_TYPE controls which database backend is active at runtime.
+    # Values: sqlite (default), postgres, mysql
+    # When postgres or mysql: set JAVINIZER_DB_DSN to a valid DSN string.
+    JAVINIZER_DB_TYPE=${DB_TYPE} \
     CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/bin/chromium-browser \
     XDG_CONFIG_HOME=/tmp/.chromium \

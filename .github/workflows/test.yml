@@ -58,7 +58,7 @@ jobs:
       uses: codecov/codecov-action@v5
       with:
         files: ./coverage.out
-        slug: javinizer/Javinizer-Go
+        slug: fedora-oss/javinizer-go
         flags: unittests
         name: codecov-javinizer
         use_oidc: true

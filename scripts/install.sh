@@ -2,9 +2,9 @@
 set -e
 
 # Javinizer CLI Installer
-# Usage: curl -sSL https://raw.githubusercontent.com/javinizer/javinizer-go/master/scripts/install.sh | bash
+# Usage: curl -sSL https://raw.githubusercontent.com/fedora-oss/javinizer-go/master/scripts/install.sh | bash
 
-GITHUB_REPO="javinizer/javinizer-go"
+GITHUB_REPO="fedora-oss/javinizer-go"
 BINARY_NAME="javinizer"
 INSTALL_DIR="/usr/local/bin"
 USER_INSTALL_DIR="$HOME/bin"

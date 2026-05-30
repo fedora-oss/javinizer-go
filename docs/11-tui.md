@@ -20,7 +20,7 @@ The Javinizer TUI (Terminal User Interface) provides an interactive way to brows
 go build -o javinizer ./cmd/javinizer
 
 # Or install directly
-go install github.com/javinizer/javinizer-go/cmd/javinizer@latest
+go install github.com/fedora-oss/javinizer-go/cmd/javinizer@latest
 ```
 
 ## Usage

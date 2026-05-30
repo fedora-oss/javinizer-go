@@ -4,7 +4,7 @@
 
 packages:
   # Repository interfaces (8 total) from internal/database/
-  github.com/javinizer/javinizer-go/internal/database:
+  github.com/fedora-oss/javinizer-go/internal/database:
     config:
       dir: "internal/mocks"
       filename: "{{.InterfaceName}}.go"
@@ -23,7 +23,7 @@ packages:
       JobRepositoryInterface:
 
   # HTTP client interface from internal/httpclient
-  github.com/javinizer/javinizer-go/internal/httpclient:
+  github.com/fedora-oss/javinizer-go/internal/httpclient:
     config:
       dir: "internal/mocks"
       filename: "{{.InterfaceName}}.go"
@@ -32,7 +32,7 @@ packages:
       HTTPClient:
 
   # Scraper interface from internal/models
-  github.com/javinizer/javinizer-go/internal/models:
+  github.com/fedora-oss/javinizer-go/internal/models:
     config:
       dir: "internal/mocks"
       filename: "{{.InterfaceName}}.go"
@@ -41,7 +41,7 @@ packages:
       Scraper:
 
   # Aggregator interface from internal/aggregator
-  github.com/javinizer/javinizer-go/internal/aggregator:
+  github.com/fedora-oss/javinizer-go/internal/aggregator:
     config:
       dir: "internal/mocks"
       filename: "{{.InterfaceName}}.go"
@@ -50,7 +50,7 @@ packages:
       AggregatorInterface:
 
   # EventEmitter interface from internal/eventlog
-  github.com/javinizer/javinizer-go/internal/eventlog:
+  github.com/fedora-oss/javinizer-go/internal/eventlog:
     config:
       dir: "internal/mocks"
       filename: "{{.InterfaceName}}.go"

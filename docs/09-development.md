@@ -51,7 +51,7 @@ javinizer-go/
 
 ```bash
 # Clone repository
-git clone https://github.com/javinizer/javinizer-go.git
+git clone https://github.com/fedora-oss/javinizer-go.git
 cd javinizer-go
 
 # Install dependencies
@@ -89,8 +89,8 @@ go test ./... -v
 package newscraper
 
 import (
-    "github.com/javinizer/javinizer-go/internal/config"
-    "github.com/javinizer/javinizer-go/internal/models"
+    "github.com/fedora-oss/javinizer-go/internal/config"
+    "github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 type Scraper struct {
@@ -131,7 +131,7 @@ func (s *Scraper) GetURL(id string) string {
 
 ```go
 // cmd/javinizer/root.go
-import "github.com/javinizer/javinizer-go/internal/scraper/newscraper"
+import "github.com/fedora-oss/javinizer-go/internal/scraper/newscraper"
 
 registry := models.NewScraperRegistry()
 registry.Register(r18dev.New(cfg))
@@ -250,7 +250,7 @@ import (
     "github.com/gin-gonic/gin"
     "gopkg.in/yaml.v3"
     
-    "github.com/javinizer/javinizer-go/internal/config"
+    "github.com/fedora-oss/javinizer-go/internal/config"
 )
 ```
 

@@ -1,0 +1,244 @@
+# ==============================================================================
+# docker-compose.local.yml — Build từ source và dựng container local
+# ==============================================================================
+#
+# File này luôn BUILD IMAGE từ source code thay vì pull từ registry.
+# Dùng khi phát triển / test trước khi push lên CI.
+#
+# Cách dùng:
+#
+#   # SQLite (mặc định)
+#   docker compose -f docker-compose.local.yml up -d --build
+#
+#   # PostgreSQL
+#   docker compose -f docker-compose.local.yml --profile postgres up -d --build
+#
+#   # MySQL / MariaDB
+#   docker compose -f docker-compose.local.yml --profile mysql up -d --build
+#
+#   # Kết hợp profiles
+#   docker compose -f docker-compose.local.yml --profile postgres --profile flaresolverr up -d --build
+#
+#   # Rebuild từ đầu (xóa cache layer)
+#   docker compose -f docker-compose.local.yml up -d --build --no-cache
+#
+#   # Xem log
+#   docker compose -f docker-compose.local.yml logs -f
+#
+#   # Dừng
+#   docker compose -f docker-compose.local.yml down
+#
+#   # Dừng và xóa volumes (reset DB)
+#   docker compose -f docker-compose.local.yml --profile postgres down -v
+#
+# Yêu cầu:
+#   cp .env.example .env   # Tạo .env trước khi chạy
+# ==============================================================================
+
+# ── Build arguments chung ──────────────────────────────────────────────────────
+# Tự động lấy version từ git nếu có, fallback về "local-dev"
+x-build-args: &build-args
+  VERSION: ${VERSION:-local-dev}
+  COMMIT: ${COMMIT:-unknown}
+  BUILD_DATE: ${BUILD_DATE:-unknown}
+  USER_ID: ${PUID:-1000}
+  GROUP_ID: ${PGID:-1000}
+
+# ── Shared common config (áp dụng cho tất cả javinizer variants) ──────────────
+x-javinizer-common: &javinizer-common
+  restart: unless-stopped
+  env_file:
+    - .env
+  ports:
+    - "${HOST_PORT:-8080}:8080"
+  volumes:
+    - ./data:/javinizer
+    - ${MEDIA_PATH:-./data/media}:/media
+  healthcheck:
+    test:
+      - "CMD"
+      - "wget"
+      - "--method=GET"
+      - "-O"
+      - "/dev/null"
+      - "-q"
+      - "http://localhost:8080/health"
+    interval: 30s
+    timeout: 5s
+    retries: 3
+    start_period: 20s
+
+# ── Shared environment ─────────────────────────────────────────────────────────
+x-javinizer-env: &javinizer-env
+  JAVINIZER_HOME: /javinizer
+  JAVINIZER_CONFIG: /javinizer/config.yaml
+  JAVINIZER_LOG_DIR: /javinizer/logs
+  JAVINIZER_TEMP_DIR: /javinizer/temp
+  TZ: ${TZ:-UTC}
+  JAVINIZER_SETUP_TRUSTED_CIDRS: ${JAVINIZER_SETUP_TRUSTED_CIDRS:-172.16.0.0/12}
+
+# ==============================================================================
+services:
+
+  # ── SQLite (default — không cần DB riêng) ────────────────────────────────────
+  javinizer:
+    <<: *javinizer-common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        <<: *build-args
+        DB_TYPE: sqlite
+    image: javinizer-local:sqlite           # Tag local, không đụng registry
+    container_name: javinizer-local
+    environment:
+      <<: *javinizer-env
+      JAVINIZER_DB: /javinizer/javinizer.db
+      JAVINIZER_DB_TYPE: sqlite
+
+  # ── PostgreSQL variant ────────────────────────────────────────────────────────
+  #
+  #   docker compose -f docker-compose.local.yml --profile postgres up -d --build
+  #
+  javinizer-postgres:
+    <<: *javinizer-common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        <<: *build-args
+        DB_TYPE: postgres             # CGO=0, pure-Go, image nhỏ hơn
+    image: javinizer-local:postgres
+    profiles: ["postgres"]
+    container_name: javinizer-local-postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *javinizer-env
+      JAVINIZER_DB_TYPE: postgres
+      # host = tên service "postgres" trong Docker network
+      JAVINIZER_DB_DSN: >-
+        host=postgres
+        user=${POSTGRES_USER:-javinizer}
+        password=${POSTGRES_PASSWORD:-changeme}
+        dbname=${POSTGRES_DB:-javinizer}
+        sslmode=disable
+        TimeZone=UTC
+      JAVINIZER_DB_MAX_OPEN_CONNS: ${DB_MAX_OPEN_CONNS:-25}
+      JAVINIZER_DB_MAX_IDLE_CONNS: ${DB_MAX_IDLE_CONNS:-5}
+      JAVINIZER_DB_CONN_MAX_LIFETIME: ${DB_CONN_MAX_LIFETIME:-300}
+
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["postgres"]
+    container_name: javinizer-local-db-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-javinizer}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: ${POSTGRES_DB:-javinizer}
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      - postgres_data_local:/var/lib/postgresql/data
+    ports:
+      # Luôn expose ra host để dùng psql / pgAdmin khi dev
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - "pg_isready -U ${POSTGRES_USER:-javinizer} -d ${POSTGRES_DB:-javinizer}"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # ── MySQL variant ─────────────────────────────────────────────────────────────
+  #
+  #   docker compose -f docker-compose.local.yml --profile mysql up -d --build
+  #
+  javinizer-mysql:
+    <<: *javinizer-common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        <<: *build-args
+        DB_TYPE: mysql                # CGO=0, pure-Go
+    image: javinizer-local:mysql
+    profiles: ["mysql"]
+    container_name: javinizer-local-mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      <<: *javinizer-env
+      JAVINIZER_DB_TYPE: mysql
+      # parseTime=True&loc=UTC bắt buộc để GORM map DATETIME → time.Time đúng
+      JAVINIZER_DB_DSN: >-
+        ${MYSQL_USER:-javinizer}:${MYSQL_PASSWORD:-changeme}@tcp(mysql:3306)/${MYSQL_DB:-javinizer}?parseTime=True&loc=UTC&charset=utf8mb4&collation=utf8mb4_unicode_ci
+      JAVINIZER_DB_MAX_OPEN_CONNS: ${DB_MAX_OPEN_CONNS:-25}
+      JAVINIZER_DB_MAX_IDLE_CONNS: ${DB_MAX_IDLE_CONNS:-5}
+      JAVINIZER_DB_CONN_MAX_LIFETIME: ${DB_CONN_MAX_LIFETIME:-300}
+
+  mysql:
+    image: mysql:8.4
+    profiles: ["mysql"]
+    container_name: javinizer-local-db-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootchangeme}
+      MYSQL_USER: ${MYSQL_USER:-javinizer}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-changeme}
+      MYSQL_DATABASE: ${MYSQL_DB:-javinizer}
+      TZ: UTC
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--default-time-zone=+00:00"
+    volumes:
+      - mysql_data_local:/var/lib/mysql
+    ports:
+      # Luôn expose ra host để dùng MySQL Workbench / DBeaver khi dev
+      - "${MYSQL_HOST_PORT:-3306}:3306"
+    healthcheck:
+      test:
+        - "CMD"
+        - "mysqladmin"
+        - "ping"
+        - "-h"
+        - "localhost"
+        - "-u"
+        - "${MYSQL_USER:-javinizer}"
+        - "--password=${MYSQL_PASSWORD:-changeme}"
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  # ── FlareSolverr (optional) ───────────────────────────────────────────────────
+  #
+  #   docker compose -f docker-compose.local.yml --profile flaresolverr up -d
+  #
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    profiles: ["flaresolverr"]
+    container_name: javinizer-local-flaresolverr
+    restart: unless-stopped
+    ports:
+      - "${FLARESOLVERR_HOST_PORT:-8191}:8191"
+    environment:
+      LOG_LEVEL: ${FLARESOLVERR_LOG_LEVEL:-info}
+      LOG_HTML: ${FLARESOLVERR_LOG_HTML:-false}
+      CAPTCHA_SOLVER: ${FLARESOLVERR_CAPTCHA_SOLVER:-none}
+      TZ: ${TZ:-UTC}
+
+# ==============================================================================
+# Named volumes — tách biệt với production volumes trong docker-compose.yml
+# ==============================================================================
+volumes:
+  postgres_data_local:
+    driver: local
+  mysql_data_local:
+    driver: local

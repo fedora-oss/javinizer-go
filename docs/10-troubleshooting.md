@@ -370,7 +370,7 @@ javinizer sort /path --dry-run 2> debug.log
 ## Getting Help
 
 1. **Check documentation**: Review relevant guide
-2. **Search issues**: https://github.com/javinizer/javinizer-go/issues
+2. **Search issues**: https://github.com/fedora-oss/javinizer-go/issues
 3. **Enable debug logging**: Capture detailed output
 4. **Create issue**: Provide:
    - Javinizer version
