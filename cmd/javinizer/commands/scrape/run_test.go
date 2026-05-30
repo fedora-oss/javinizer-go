@@ -6,16 +6,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/cmd/javinizer/commands/scrape"
-	"github.com/javinizer/javinizer-go/internal/commandutil"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/scrape"
+	"github.com/fedora-oss/javinizer-go/internal/commandutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	// Register scraper defaults for NormalizeScraperConfigs
-	_ "github.com/javinizer/javinizer-go/internal/scraper/dmm"
+	_ "github.com/fedora-oss/javinizer-go/internal/scraper/dmm"
 )
 
 // Integration Tests for Run() Function (Epic 7 Story 7.2)

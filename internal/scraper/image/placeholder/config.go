@@ -3,7 +3,7 @@ package placeholder
 import (
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 const DefaultThresholdKB = 10

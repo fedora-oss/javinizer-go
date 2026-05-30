@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/javinizer/javinizer-go/internal/imageutil"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/imageutil"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 // video_dmm.go contains extraction functions specific to video.dmm.co.jp (new site format).

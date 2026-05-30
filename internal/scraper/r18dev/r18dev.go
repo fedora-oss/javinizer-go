@@ -12,14 +12,14 @@ import (
 	"unicode"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/httpclient"
-	"github.com/javinizer/javinizer-go/internal/imageutil"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/ratelimit"
-	"github.com/javinizer/javinizer-go/internal/scraper/image/placeholder"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/imageutil"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/ratelimit"
+	"github.com/fedora-oss/javinizer-go/internal/scraper/image/placeholder"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 const (

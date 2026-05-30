@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

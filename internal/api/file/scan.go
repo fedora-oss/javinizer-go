@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
 	"github.com/spf13/afero"
 )
 

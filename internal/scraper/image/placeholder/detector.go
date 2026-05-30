@@ -11,8 +11,8 @@ import (
 	"strconv"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 func IsPlaceholder(ctx context.Context, client *resty.Client, url string, cfg Config) (bool, error) {

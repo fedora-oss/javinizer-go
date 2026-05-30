@@ -29,12 +29,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

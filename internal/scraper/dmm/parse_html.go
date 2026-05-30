@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/javinizer/javinizer-go/internal/imageutil"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/imageutil"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 var (

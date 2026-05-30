@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 func TestParseDetailPage(t *testing.T) {

@@ -15,8 +15,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
 )
 
 func TestMatcher_MatchFile(t *testing.T) {

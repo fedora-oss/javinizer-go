@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
-	"github.com/javinizer/javinizer-go/internal/runtime"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/runtime"
 )
 
 // UpdateState represents the cached update information.

@@ -5,10 +5,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/template"
 )
 
 // AggregatorInterface abstracts aggregator operations for dependency injection.

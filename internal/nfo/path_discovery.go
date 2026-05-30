@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 var osStat = os.Stat

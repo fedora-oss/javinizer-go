@@ -7,8 +7,8 @@ import (
 
 	"github.com/spf13/afero"
 
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/nfo"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/nfo"
 )
 
 // ExampleGenerator_Generate demonstrates how to generate an NFO file

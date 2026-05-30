@@ -3,8 +3,8 @@ package worker
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/nfo"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/nfo"
 	"github.com/stretchr/testify/assert"
 )
 

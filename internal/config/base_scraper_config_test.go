@@ -3,7 +3,7 @@ package config
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 	"github.com/stretchr/testify/assert"
 )
 

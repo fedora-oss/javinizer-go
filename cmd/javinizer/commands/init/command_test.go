@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	initcmd "github.com/javinizer/javinizer-go/cmd/javinizer/commands/init"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
+	initcmd "github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/init"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

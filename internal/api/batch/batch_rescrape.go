@@ -6,11 +6,11 @@ import (
 	"sync"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 const bulkRescrapeWorkers = 5

@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
 )
 
 type JavstashConfig struct {

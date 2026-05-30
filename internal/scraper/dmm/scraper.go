@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/httpclient"
-	"github.com/javinizer/javinizer-go/internal/ratelimit"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/ratelimit"
 )
 
 const (

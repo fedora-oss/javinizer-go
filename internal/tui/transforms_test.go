@@ -3,7 +3,7 @@ package tui
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 func normalizeTranslationPayload(payload string) string {

@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/update"
-	"github.com/javinizer/javinizer-go/internal/version"
+	"github.com/fedora-oss/javinizer-go/internal/update"
+	"github.com/fedora-oss/javinizer-go/internal/version"
 )
 
 // VersionStatusResponse represents the response for version status endpoints.

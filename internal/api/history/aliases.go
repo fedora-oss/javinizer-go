@@ -1,5 +1,5 @@
 package history
 
-import "github.com/javinizer/javinizer-go/internal/api/contracts"
+import "github.com/fedora-oss/javinizer-go/internal/api/contracts"
 
 type ErrorResponse = contracts.ErrorResponse

@@ -5,11 +5,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/cmd/javinizer/commands/update"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/scanner"
-	"github.com/javinizer/javinizer-go/internal/testutil"
+	"github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/update"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

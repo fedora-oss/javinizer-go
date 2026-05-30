@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/mediainfo"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/mediainfo"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // Context holds all data available for template execution

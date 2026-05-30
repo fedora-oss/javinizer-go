@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/mattn/go-sqlite3"
 	"gorm.io/gorm"
 )

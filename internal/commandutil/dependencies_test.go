@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

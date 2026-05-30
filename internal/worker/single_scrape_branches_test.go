@@ -7,11 +7,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 func newRunBatchFallbackEnv(t *testing.T) (*config.Config, *database.MovieRepository, *aggregator.Aggregator, *matcher.Matcher) {

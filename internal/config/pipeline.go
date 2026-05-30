@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
-	"github.com/javinizer/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/types"
 )
 
 func normalizeField(value *string, defaultValue string, toLower bool) bool {

@@ -1,7 +1,7 @@
 package system
 
 import (
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 func scraperDisplayTitleAndOptions(name string, profileChoices []ScraperChoice) (string, []ScraperOption) {

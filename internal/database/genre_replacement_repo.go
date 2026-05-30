@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 type GenreReplacementRepository struct {

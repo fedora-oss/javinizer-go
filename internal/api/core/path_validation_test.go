@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

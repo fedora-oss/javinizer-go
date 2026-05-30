@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	httpclient "github.com/javinizer/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	httpclient "github.com/fedora-oss/javinizer-go/internal/httpclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

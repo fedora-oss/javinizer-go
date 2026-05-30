@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // MergeStrategy defines how to merge metadata from different sources

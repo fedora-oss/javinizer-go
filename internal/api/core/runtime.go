@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
 )
 
 // RuntimeState holds mutable server runtime components.

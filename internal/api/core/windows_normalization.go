@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
 )
 
 const osWindows = "windows"

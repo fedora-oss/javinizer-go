@@ -3,7 +3,7 @@ package worker
 import (
 	"os"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 func findExistingNFO(jobID string, fileIndex int, nfoPath string, legacyPaths []string) string {

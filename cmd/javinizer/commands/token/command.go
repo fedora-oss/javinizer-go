@@ -7,10 +7,10 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/api/token"
-	"github.com/javinizer/javinizer-go/internal/commandutil"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/api/token"
+	"github.com/fedora-oss/javinizer-go/internal/commandutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
 	"github.com/spf13/cobra"
 )
 

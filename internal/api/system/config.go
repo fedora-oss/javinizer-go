@@ -5,12 +5,12 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/scraper"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/scraper"
 )
 
 // getConfig godoc

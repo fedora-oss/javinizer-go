@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 type R18DevConfig struct {

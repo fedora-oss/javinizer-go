@@ -8,17 +8,17 @@ import (
 	"os"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/cmd/javinizer/commands/scrape"
-	"github.com/javinizer/javinizer-go/internal/commandutil"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/scrape"
+	"github.com/fedora-oss/javinizer-go/internal/commandutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	// Register scraper defaults for NormalizeScraperConfigs
-	_ "github.com/javinizer/javinizer-go/internal/scraper/dmm"
-	_ "github.com/javinizer/javinizer-go/internal/scraper/r18dev"
+	_ "github.com/fedora-oss/javinizer-go/internal/scraper/dmm"
+	_ "github.com/fedora-oss/javinizer-go/internal/scraper/r18dev"
 )
 
 // Tests

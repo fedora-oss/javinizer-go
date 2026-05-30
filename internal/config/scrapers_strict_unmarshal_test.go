@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	config "github.com/javinizer/javinizer-go/internal/config"
-	_ "github.com/javinizer/javinizer-go/internal/scraper/dmm"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	config "github.com/fedora-oss/javinizer-go/internal/config"
+	_ "github.com/fedora-oss/javinizer-go/internal/scraper/dmm"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 func TestLoadFailsOnInvalidScrapersTimeoutType(t *testing.T) {

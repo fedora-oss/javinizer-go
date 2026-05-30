@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // validateRequiredFields checks if all required fields are present and non-empty

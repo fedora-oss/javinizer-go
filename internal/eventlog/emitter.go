@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // EventEmitter allows any code path to emit typed structured events

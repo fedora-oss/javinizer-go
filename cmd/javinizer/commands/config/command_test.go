@@ -5,9 +5,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	configcmd "github.com/javinizer/javinizer-go/cmd/javinizer/commands/config"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/testutil"
+	configcmd "github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/testutil"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

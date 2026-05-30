@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 func captureOutput(t *testing.T, fn func()) string {

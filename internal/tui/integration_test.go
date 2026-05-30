@@ -8,8 +8,8 @@ import (
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/javinizer/javinizer-go/internal/testutil"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/testutil"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

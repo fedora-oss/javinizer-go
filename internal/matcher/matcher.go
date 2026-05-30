@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
 )
 
 // Matcher identifies JAV IDs from filenames

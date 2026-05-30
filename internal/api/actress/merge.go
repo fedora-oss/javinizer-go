@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/database"
 )
 
 func writeActressMergeError(c *gin.Context, err error) {

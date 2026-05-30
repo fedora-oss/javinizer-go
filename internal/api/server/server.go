@@ -10,9 +10,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 // resolveSwaggerPath returns the path to swagger.json, checking multiple locations.

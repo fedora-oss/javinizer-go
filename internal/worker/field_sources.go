@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/nfo"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/nfo"
 )
 
 // buildFieldSourcesFromScrapeResults returns a map of frontend movie field keys

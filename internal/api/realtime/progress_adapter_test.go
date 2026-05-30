@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/websocket"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -1,8 +1,8 @@
 package nfo
 
 import (
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
 )
 
 // ConfigFromAppConfig converts application config to NFO generator config

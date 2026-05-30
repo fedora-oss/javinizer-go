@@ -6,17 +6,17 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/javinizer/javinizer-go/internal/api/actress"
-	"github.com/javinizer/javinizer-go/internal/api/batch"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/api/file"
-	"github.com/javinizer/javinizer-go/internal/api/history"
-	"github.com/javinizer/javinizer-go/internal/api/movie"
-	"github.com/javinizer/javinizer-go/internal/api/realtime"
-	"github.com/javinizer/javinizer-go/internal/api/system"
-	"github.com/javinizer/javinizer-go/internal/api/testkit"
-	apiversion "github.com/javinizer/javinizer-go/internal/api/version"
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/api/actress"
+	"github.com/fedora-oss/javinizer-go/internal/api/batch"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/api/file"
+	"github.com/fedora-oss/javinizer-go/internal/api/history"
+	"github.com/fedora-oss/javinizer-go/internal/api/movie"
+	"github.com/fedora-oss/javinizer-go/internal/api/realtime"
+	"github.com/fedora-oss/javinizer-go/internal/api/system"
+	"github.com/fedora-oss/javinizer-go/internal/api/testkit"
+	apiversion "github.com/fedora-oss/javinizer-go/internal/api/version"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 func createTestDeps(t *testing.T, cfg *config.Config, configFile string) *core.ServerDependencies {

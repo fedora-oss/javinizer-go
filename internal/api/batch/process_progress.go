@@ -1,9 +1,9 @@
 package batch
 
 import (
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
 )
 
 func broadcastProgress(msg *ws.ProgressMessage) {

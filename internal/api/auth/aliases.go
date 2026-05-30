@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/javinizer/javinizer-go/internal/api/contracts"
-	"github.com/javinizer/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/api/contracts"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
 )
 
 type ServerDependencies = core.ServerDependencies

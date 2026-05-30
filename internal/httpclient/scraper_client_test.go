@@ -3,7 +3,7 @@ package httpclient
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 	"github.com/stretchr/testify/assert"
 )
 

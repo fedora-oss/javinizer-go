@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/gofrs/flock"
-	"github.com/javinizer/javinizer-go/internal/configutil"
-	dbmigrations "github.com/javinizer/javinizer-go/internal/database/migrations"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
+	dbmigrations "github.com/fedora-oss/javinizer-go/internal/database/migrations"
 	"github.com/pressly/goose/v3"
 	gooselock "github.com/pressly/goose/v3/lock"
 )

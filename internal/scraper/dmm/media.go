@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/javinizer/javinizer-go/internal/imageutil"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/scraper/image/placeholder"
+	"github.com/fedora-oss/javinizer-go/internal/imageutil"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/scraper/image/placeholder"
 )
 
 var coverPsRegex = regexp.MustCompile(`"(https://pics\.dmm\.co\.jp/[^"'\x60]+ps\.jpg)"`)

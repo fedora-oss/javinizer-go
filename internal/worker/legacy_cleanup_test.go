@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/api/contracts"
+	"github.com/fedora-oss/javinizer-go/internal/api/contracts"
 	"github.com/stretchr/testify/assert"
 )
 

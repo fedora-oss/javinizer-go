@@ -7,8 +7,8 @@ package mocks
 import (
 	"context"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	mock "github.com/stretchr/testify/mock"
 )
 

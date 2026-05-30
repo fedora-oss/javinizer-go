@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 // FilterVideoFiles returns only video files matching the provided extensions.

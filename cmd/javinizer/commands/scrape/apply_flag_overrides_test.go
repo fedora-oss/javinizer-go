@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	// Register scraper defaults for NormalizeScraperConfigs
-	_ "github.com/javinizer/javinizer-go/internal/scraper/dmm"
+	_ "github.com/fedora-oss/javinizer-go/internal/scraper/dmm"
 )
 
 // TestApplyFlagOverrides_ActressDB tests actress-db flag overrides

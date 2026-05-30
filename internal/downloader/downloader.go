@@ -14,14 +14,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/configutil"
-	"github.com/javinizer/javinizer-go/internal/httpclient"
-	imageutil "github.com/javinizer/javinizer-go/internal/image"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/nfo"
-	"github.com/javinizer/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/httpclient"
+	imageutil "github.com/fedora-oss/javinizer-go/internal/image"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/nfo"
+	"github.com/fedora-oss/javinizer-go/internal/template"
 	"github.com/spf13/afero"
 )
 

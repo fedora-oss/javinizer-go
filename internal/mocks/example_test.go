@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/mocks"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/mocks"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

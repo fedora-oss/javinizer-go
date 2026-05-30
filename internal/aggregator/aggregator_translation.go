@@ -3,7 +3,7 @@ package aggregator
 import (
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // mergeOrAppendTranslation merges or appends an incoming translation to existing translations

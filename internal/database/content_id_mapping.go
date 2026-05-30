@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // ContentIDMappingRepository provides database operations for content ID mappings

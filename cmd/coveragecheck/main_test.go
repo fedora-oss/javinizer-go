@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/coverage"
+	"github.com/fedora-oss/javinizer-go/internal/coverage"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -3,9 +3,9 @@ package worker
 import (
 	"context"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/template"
 )
 
 func applyDisplayTitle(ctx context.Context, job *BatchJob, cfg *config.Config, movie *models.Movie, titleSource *models.Movie) {

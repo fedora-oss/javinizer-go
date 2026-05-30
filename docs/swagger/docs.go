@@ -9,10 +9,10 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "https://github.com/javinizer/javinizer-go",
+        "termsOfService": "https://github.com/fedora-oss/javinizer-go",
         "contact": {
             "name": "API Support",
-            "url": "https://github.com/javinizer/javinizer-go/issues"
+            "url": "https://github.com/fedora-oss/javinizer-go/issues"
         },
         "license": {
             "name": "MIT",

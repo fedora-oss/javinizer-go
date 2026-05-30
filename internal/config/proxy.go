@@ -3,7 +3,7 @@ package config
 import (
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
 	"gopkg.in/yaml.v3"
 )
 
