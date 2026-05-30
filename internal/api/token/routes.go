@@ -2,7 +2,7 @@ package token
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
 )
 
 func RegisterRoutes(protected *gin.RouterGroup, writeProtected *gin.RouterGroup, deps *core.ServerDependencies) {

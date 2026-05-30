@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/runtime"
-	"github.com/javinizer/javinizer-go/internal/version"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/runtime"
+	"github.com/fedora-oss/javinizer-go/internal/version"
 )
 
 // Service handles update checking with caching and background refresh.

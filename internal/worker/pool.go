@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 	"golang.org/x/sync/semaphore"
 )
 

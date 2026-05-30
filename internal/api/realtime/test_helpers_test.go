@@ -3,8 +3,8 @@ package realtime
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/api/testkit"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/api/testkit"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
 )
 
 var wsHub *ws.Hub

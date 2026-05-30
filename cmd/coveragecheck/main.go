@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/javinizer/javinizer-go/internal/coverage"
+	"github.com/fedora-oss/javinizer-go/internal/coverage"
 )
 
 var osExit = os.Exit

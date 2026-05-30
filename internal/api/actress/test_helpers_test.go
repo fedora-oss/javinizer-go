@@ -1,8 +1,8 @@
 package actress
 
 import (
-	"github.com/javinizer/javinizer-go/internal/api/testkit"
-	"github.com/javinizer/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/api/testkit"
+	"github.com/fedora-oss/javinizer-go/internal/database"
 )
 
 func newMockActressRepo() *database.ActressRepository {

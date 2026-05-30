@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
 )
 
 var tempFileCounter uint64

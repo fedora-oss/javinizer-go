@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/javinizer/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/types"
 )
 
 func TestParseOperationMode(t *testing.T) {

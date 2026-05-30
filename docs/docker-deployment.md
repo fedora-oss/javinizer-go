@@ -30,7 +30,7 @@ The fastest way to get Javinizer running:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/javinizer/javinizer-go.git
+git clone https://github.com/fedora-oss/javinizer-go.git
 cd javinizer-go
 
 # 2. Configure environment variables
@@ -536,7 +536,7 @@ Javinizer can also run as a standalone binary without Docker. Pre-built binaries
 - **macOS**: `amd64`, `arm64` (Apple Silicon), `universal`
 - **Windows**: `amd64`
 
-Download from [GitHub Releases](https://github.com/javinizer/javinizer-go/releases).
+Download from [GitHub Releases](https://github.com/fedora-oss/javinizer-go/releases).
 
 **Advantages**:
 - No Docker runtime required
@@ -634,14 +634,14 @@ If a deployment encounters issues, you can revert to a previous version:
    docker images | grep javinizer
    
    # Or check GitHub releases for previous versions
-   # https://github.com/javinizer/javinizer-go/releases
+   # https://github.com/fedora-oss/javinizer-go/releases
    ```
 
 3. **Redeploy the previous version**:
    ```bash
    # Option 1: Pull specific version from GHCR
-   docker pull ghcr.io/javinizer/javinizer-go:v1.2.3
-   docker tag ghcr.io/javinizer/javinizer-go:v1.2.3 javinizer:latest
+   docker pull ghcr.io/fedora-oss/javinizer-go:v1.2.3
+   docker tag ghcr.io/fedora-oss/javinizer-go:v1.2.3 javinizer:latest
    docker-compose up -d
    
    # Option 2: Build from previous Git tag
@@ -662,7 +662,7 @@ If a deployment encounters issues, you can revert to a previous version:
 
 ### Standalone Binary Rollback
 
-1. **Download the previous binary** from [GitHub Releases](https://github.com/javinizer/javinizer-go/releases)
+1. **Download the previous binary** from [GitHub Releases](https://github.com/fedora-oss/javinizer-go/releases)
 
 2. **Stop the current service**:
    ```bash
@@ -770,5 +770,5 @@ Monitoring capabilities may be added in future releases. Track progress on GitHu
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/javinizer/javinizer-go/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/javinizer/javinizer-go/discussions)
+- **Issues**: [GitHub Issues](https://github.com/fedora-oss/javinizer-go/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/fedora-oss/javinizer-go/discussions)

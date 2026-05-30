@@ -9,14 +9,14 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 // Test helpers for creating mock repositories

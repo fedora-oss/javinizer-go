@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/javinizer/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/types"
 )
 
 func GetOperationMode(mode string) types.OperationMode {

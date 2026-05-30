@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
-	"github.com/javinizer/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/types"
 	"gopkg.in/yaml.v3"
 )
 
@@ -180,11 +180,28 @@ type OutputConfig struct {
 	DownloadProxy       ProxyConfig         `yaml:"download_proxy" json:"download_proxy"`     // Separate proxy for downloads (optional)
 }
 
-// DatabaseConfig holds database configuration
+// DatabaseConfig holds database configuration.
+// Supported values for Type: "sqlite" (default), "postgres", "mysql".
 type DatabaseConfig struct {
-	Type     string `yaml:"type" json:"type"`           // sqlite (currently only supported backend)
-	DSN      string `yaml:"dsn" json:"dsn"`             // Data Source Name
-	LogLevel string `yaml:"log_level" json:"log_level"` // Database query logging: silent, error, warn, info (default: silent)
+	// Type selects the database backend.
+	// Valid options: sqlite, postgres, mysql. Defaults to sqlite when empty.
+	Type string `yaml:"type" json:"type"`
+
+	// DSN is the Data Source Name whose format depends on Type:
+	//   sqlite   – file path or :memory: (e.g. "/data/javinizer.db")
+	//   postgres – libpq-style DSN (e.g. "host=localhost user=jav password=secret dbname=jav sslmode=disable")
+	//   mysql    – DSN per go-sql-driver/mysql (e.g. "jav:secret@tcp(localhost:3306)/jav?parseTime=True")
+	DSN string `yaml:"dsn" json:"dsn"`
+
+	// LogLevel controls GORM query logging. Valid: silent, error, warn, info.
+	LogLevel string `yaml:"log_level" json:"log_level"`
+
+	// Connection-pool tuning (0 means "use driver default").
+	// These settings are applied after the connection is opened and are
+	// relevant primarily for Postgres and MySQL; SQLite ignores them.
+	MaxOpenConns    int `yaml:"max_open_conns" json:"max_open_conns"`       // Maximum open connections
+	MaxIdleConns    int `yaml:"max_idle_conns" json:"max_idle_conns"`       // Maximum idle connections
+	ConnMaxLifetime int `yaml:"conn_max_lifetime" json:"conn_max_lifetime"` // Seconds before a connection is recycled (0 = unlimited)
 }
 
 // LoggingConfig holds logging configuration

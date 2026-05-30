@@ -1,7 +1,7 @@
 package organizer
 
 import (
-	"github.com/javinizer/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/types"
 )
 
 type OperationMode = types.OperationMode

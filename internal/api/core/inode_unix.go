@@ -6,7 +6,7 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
 )
 
 // fileIdentity represents a unique file identifier (device + inode)

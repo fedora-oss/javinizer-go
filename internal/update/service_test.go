@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	appversion "github.com/javinizer/javinizer-go/internal/version"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	appversion "github.com/fedora-oss/javinizer-go/internal/version"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

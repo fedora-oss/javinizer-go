@@ -11,13 +11,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/downloader"
-	httpclientiface "github.com/javinizer/javinizer-go/internal/httpclient"
-	imageutil "github.com/javinizer/javinizer-go/internal/image"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/downloader"
+	httpclientiface "github.com/fedora-oss/javinizer-go/internal/httpclient"
+	imageutil "github.com/fedora-oss/javinizer-go/internal/image"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/spf13/afero"
 )
 

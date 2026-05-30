@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 // Rating represents rating information from scrapers

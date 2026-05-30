@@ -3,7 +3,7 @@ package database
 import (
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // filterIdentifiableActresses removes actresses from the list that have no

@@ -1448,7 +1448,7 @@ The project provides a shared test utilities package at `internal/testutil/` wit
 **Example:**
 
 ```go
-import "github.com/javinizer/javinizer-go/internal/testutil"
+import "github.com/fedora-oss/javinizer-go/internal/testutil"
 
 func TestWithDatabase(t *testing.T) {
     configPath, dbPath := testutil.SetupTestDB(t)

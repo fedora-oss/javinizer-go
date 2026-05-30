@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
 	"github.com/stretchr/testify/assert"
 )
 

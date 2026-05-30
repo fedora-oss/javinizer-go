@@ -3,10 +3,10 @@ package realtime
 import (
 	"sync"
 
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/websocket"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 // ProgressBroadcaster is an interface for broadcasting progress messages.

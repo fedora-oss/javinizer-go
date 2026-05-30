@@ -60,7 +60,7 @@ Javinizer Go is a modern, high-performance metadata scraper and file organizer f
 
 ### Option 1: Download Pre-built Binary (Recommended)
 
-1. Download the latest release for your platform from the [Releases page](https://github.com/javinizer/javinizer-go/releases)
+1. Download the latest release for your platform from the [Releases page](https://github.com/fedora-oss/javinizer-go/releases)
 
 2. Extract the archive:
    ```bash
@@ -87,7 +87,7 @@ Javinizer Go is a modern, high-performance metadata scraper and file organizer f
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/javinizer/javinizer-go.git
+   git clone https://github.com/fedora-oss/javinizer-go.git
    cd javinizer-go
    ```
 
@@ -393,7 +393,7 @@ For detailed troubleshooting, see the [Troubleshooting Guide](./10-troubleshooti
 - **Built-in Help**: `javinizer <command> --help`
 - **Configuration Info**: `javinizer info`
 - **Troubleshooting Guide**: [10-troubleshooting.md](./10-troubleshooting.md)
-- **GitHub Issues**: [Report bugs or request features](https://github.com/javinizer/javinizer-go/issues)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/fedora-oss/javinizer-go/issues)
 
 ---
 

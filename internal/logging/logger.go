@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"github.com/javinizer/javinizer-go/internal/configutil"
+	"github.com/fedora-oss/javinizer-go/internal/configutil"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
 )

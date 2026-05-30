@@ -3,7 +3,7 @@ package movie
 import (
 	"fmt"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // identifyDifferences compares NFO, scraped, and merged data to identify key differences

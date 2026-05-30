@@ -3,8 +3,8 @@ package aggregator
 import (
 	"regexp"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 // compileGenreRegexes compiles regex patterns from ignore_genres config

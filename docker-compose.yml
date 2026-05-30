@@ -1,84 +1,260 @@
-services:
-  javinizer:
-    # Option 1: Pull pre-built image (recommended for end users)
-    # Use 'latest' for most recent release, or pin to specific version (e.g., 'v0.1.1-alpha')
-    # Available tags: https://github.com/javinizer/javinizer-go/pkgs/container/javinizer-go
-    image: ghcr.io/javinizer/javinizer-go:latest
+# ==============================================================================
+# Javinizer Go — Docker Compose
+# ==============================================================================
+# Three deployment profiles are available. Use one of:
+#
+#   SQLite (default — no extra services):
+#     docker compose up -d
+#
+#   PostgreSQL:
+#     docker compose --profile postgres up -d
+#
+#   MySQL / MariaDB:
+#     docker compose --profile mysql up -d
+#
+# Before starting, copy .env.example → .env and edit the values:
+#   cp .env.example .env
+# ==============================================================================
 
-    # Option 2: Build locally (for developers)
-    # Uncomment the 'build' section below and comment out 'image' above to build from source
+# ---------------------------------------------------------------------------
+# Shared configuration fragment re-used across service variants.
+# (YAML anchors are a Compose extension — they keep DRY without duplication.)
+# ---------------------------------------------------------------------------
+x-javinizer-common: &javinizer-common
+  restart: unless-stopped
+  env_file:
+    - .env
+  ports:
+    - "${HOST_PORT:-8080}:8080"
+  volumes:
+    # Application state: config, database (SQLite), logs, cache, temp
+    - ./data:/javinizer
+    # JAV library — change MEDIA_PATH in .env to your actual path
+    - ${MEDIA_PATH:-/path/to/your/jav-library}:/media
+  healthcheck:
+    test:
+      - "CMD"
+      - "wget"
+      - "--method=GET"
+      - "-O"
+      - "/dev/null"
+      - "-q"
+      - "http://localhost:8080/health"
+    interval: 30s
+    timeout: 5s
+    retries: 3
+    start_period: 15s
+
+# ---------------------------------------------------------------------------
+# Shared environment for all javinizer variants
+# ---------------------------------------------------------------------------
+x-javinizer-env: &javinizer-env
+  # ── Container identity ──────────────────────────────────────────────────
+  JAVINIZER_HOME: /javinizer
+  JAVINIZER_CONFIG: /javinizer/config.yaml
+  JAVINIZER_LOG_DIR: /javinizer/logs
+  JAVINIZER_TEMP_DIR: /javinizer/temp
+  TZ: ${TZ:-UTC}
+  # ── Security ────────────────────────────────────────────────────────────
+  # Controls which CIDRs may access the first-run /auth/setup endpoint.
+  # Docker bridge network is 172.16.0.0/12 by default.
+  JAVINIZER_SETUP_TRUSTED_CIDRS: ${JAVINIZER_SETUP_TRUSTED_CIDRS:-172.16.0.0/12}
+
+# ==============================================================================
+# Services
+# ==============================================================================
+services:
+
+  # ── 1. SQLite (default profile — no extra DB service needed) ──────────────
+  javinizer:
+    <<: *javinizer-common
+    # Option A: Pull the pre-built image (recommended for end users)
+    # Pin a specific tag for reproducible deployments:
+    #   image: ghcr.io/fedora-oss/javinizer-go:v0.2.0
+    image: ghcr.io/fedora-oss/javinizer-go:latest
+
+    # Option B: Build locally from source (uncomment to use)
     # build:
     #   context: .
     #   dockerfile: Dockerfile
     #   args:
-    #     - USER_ID=${PUID:-${USER_ID:-1000}}
-    #     - GROUP_ID=${PGID:-${GROUP_ID:-1000}}
+    #     DB_TYPE: sqlite          # sqlite | postgres | mysql
+    #     USER_ID: ${PUID:-1000}
+    #     GROUP_ID: ${PGID:-1000}
 
     container_name: javinizer
-    restart: unless-stopped
-    env_file:
-      - .env
-
-    ports:
-      - "${HOST_PORT:-8080}:8080"
-
-    volumes:
-      # Application state (config, database, logs, cache)
-      - ./data:/javinizer
-
-      # JAV files for sorting (read-write for organize operations)
-      - ${MEDIA_PATH:-/path/to/your/jav-library}:/media
-
-    # UPDATED environment variables
     environment:
-      # Application home directory
-      - JAVINIZER_HOME=/javinizer
+      <<: *javinizer-env
+      # SQLite: path to the database file inside the container.
+      # The ./data volume keeps the file on the host between restarts.
+      JAVINIZER_DB: /javinizer/javinizer.db
+      # Database backend — sqlite is the default, no extra config needed.
+      JAVINIZER_DB_TYPE: sqlite
 
-      # Configuration file location
-      - JAVINIZER_CONFIG=/javinizer/config.yaml
+  # ── 2. PostgreSQL variant ─────────────────────────────────────────────────
+  #
+  # Usage: docker compose --profile postgres up -d
+  #
+  javinizer-postgres:
+    <<: *javinizer-common
+    image: ghcr.io/fedora-oss/javinizer-go:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:
+    #     DB_TYPE: postgres
+    #     USER_ID: ${PUID:-1000}
+    #     GROUP_ID: ${PGID:-1000}
+    profiles: ["postgres"]
+    container_name: javinizer-postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *javinizer-env
+      JAVINIZER_DB_TYPE: postgres
+      # DSN format: host=<host> user=<user> password=<pw> dbname=<db> sslmode=disable
+      # Use the service name "postgres" as the hostname inside the Docker network.
+      JAVINIZER_DB_DSN: >-
+        host=postgres
+        user=${POSTGRES_USER:-javinizer}
+        password=${POSTGRES_PASSWORD:-changeme}
+        dbname=${POSTGRES_DB:-javinizer}
+        sslmode=disable
+        TimeZone=UTC
+      # Connection pool tuning (optional — 0 = driver default)
+      JAVINIZER_DB_MAX_OPEN_CONNS: ${DB_MAX_OPEN_CONNS:-25}
+      JAVINIZER_DB_MAX_IDLE_CONNS: ${DB_MAX_IDLE_CONNS:-5}
+      JAVINIZER_DB_CONN_MAX_LIFETIME: ${DB_CONN_MAX_LIFETIME:-300}
 
-      # Database location
-      - JAVINIZER_DB=/javinizer/javinizer.db
-
-      # Log directory (applies only when logging.output includes a file target)
-      - JAVINIZER_LOG_DIR=/javinizer/logs
-
-      # Temp directory for file processing
-      - JAVINIZER_TEMP_DIR=/javinizer/temp
-
-      # Log level (optional: debug, info, warn, error)
-      # Uncomment to override config.yaml
-      # - LOG_LEVEL=${LOG_LEVEL:-info}
-
-      # File creation mask (optional: 002, 022, etc.)
-      # 002 = rwxrwxr-x (group can write)
-      # 022 = rwxr-xr-x (only owner can write)
-      # Uncomment to override config.yaml
-      # - UMASK=${UMASK:-002}
-
-      # Timezone
-      - TZ=${TZ:-UTC}
-
-      # Trusted CIDRs for /auth/setup access (Docker bridge gateway)
-      # Without this, setup is only available from localhost inside the container
-      - JAVINIZER_SETUP_TRUSTED_CIDRS=${JAVINIZER_SETUP_TRUSTED_CIDRS:-172.16.0.0/12}
-
+  # ── PostgreSQL database ───────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["postgres"]
+    container_name: javinizer-db-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-javinizer}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: ${POSTGRES_DB:-javinizer}
+      # Store data in UTC to match the Go application
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      # Persistent database storage — survives container restarts
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      # Expose on host only when POSTGRES_HOST_PORT is set, otherwise hidden
+      - "${POSTGRES_HOST_PORT:-}:5432"
     healthcheck:
-      test: ["CMD", "wget", "--method=GET", "-O", "/dev/null", "-q", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
+      test:
+        - "CMD-SHELL"
+        - "pg_isready -U ${POSTGRES_USER:-javinizer} -d ${POSTGRES_DB:-javinizer}"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
-  # Optional: Development profile
+  # ── 3. MySQL / MariaDB variant ────────────────────────────────────────────
+  #
+  # Usage: docker compose --profile mysql up -d
+  #
+  javinizer-mysql:
+    <<: *javinizer-common
+    image: ghcr.io/fedora-oss/javinizer-go:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:
+    #     DB_TYPE: mysql
+    #     USER_ID: ${PUID:-1000}
+    #     GROUP_ID: ${PGID:-1000}
+    profiles: ["mysql"]
+    container_name: javinizer-mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      <<: *javinizer-env
+      JAVINIZER_DB_TYPE: mysql
+      # DSN format: user:password@tcp(host:port)/dbname?params
+      # parseTime=True is REQUIRED for GORM to map MySQL DATETIME to time.Time
+      JAVINIZER_DB_DSN: >-
+        ${MYSQL_USER:-javinizer}:${MYSQL_PASSWORD:-changeme}@tcp(mysql:3306)/${MYSQL_DB:-javinizer}?parseTime=True&loc=UTC&charset=utf8mb4&collation=utf8mb4_unicode_ci
+      JAVINIZER_DB_MAX_OPEN_CONNS: ${DB_MAX_OPEN_CONNS:-25}
+      JAVINIZER_DB_MAX_IDLE_CONNS: ${DB_MAX_IDLE_CONNS:-5}
+      JAVINIZER_DB_CONN_MAX_LIFETIME: ${DB_CONN_MAX_LIFETIME:-300}
+
+  # ── MySQL / MariaDB database ──────────────────────────────────────────────
+  mysql:
+    image: mysql:8.4
+    profiles: ["mysql"]
+    container_name: javinizer-db-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootchangeme}
+      MYSQL_USER: ${MYSQL_USER:-javinizer}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-changeme}
+      MYSQL_DATABASE: ${MYSQL_DB:-javinizer}
+      TZ: UTC
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--default-time-zone=+00:00"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "${MYSQL_HOST_PORT:-}:3306"
+    healthcheck:
+      test:
+        - "CMD"
+        - "mysqladmin"
+        - "ping"
+        - "-h"
+        - "localhost"
+        - "-u"
+        - "${MYSQL_USER:-javinizer}"
+        - "--password=${MYSQL_PASSWORD:-changeme}"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── 4. FlareSolverr (optional — no profile needed, always available) ──────
+  #
+  # Enables Cloudflare challenge solving for JavDB/JavLibrary.
+  # Activate via the 'flaresolverr' profile:
+  #   docker compose --profile flaresolverr up -d
+  #   docker compose --profile postgres --profile flaresolverr up -d
+  #
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    profiles: ["flaresolverr"]
+    container_name: javinizer-flaresolverr
+    restart: unless-stopped
+    ports:
+      - "${FLARESOLVERR_HOST_PORT:-8191}:8191"
+    environment:
+      LOG_LEVEL: ${FLARESOLVERR_LOG_LEVEL:-info}
+      LOG_HTML: ${FLARESOLVERR_LOG_HTML:-false}
+      CAPTCHA_SOLVER: ${FLARESOLVERR_CAPTCHA_SOLVER:-none}
+      TZ: ${TZ:-UTC}
+
+  # ── 5. Developer profile (build from source, hot-reload frontend) ─────────
+  #
+  # Usage: docker compose --profile dev up -d
+  #
   javinizer-dev:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - USER_ID=${PUID:-${USER_ID:-1000}}
-        - GROUP_ID=${PGID:-${GROUP_ID:-1000}}
+        DB_TYPE: sqlite
+        USER_ID: ${PUID:-1000}
+        GROUP_ID: ${PGID:-1000}
     profiles: ["dev"]
+    container_name: javinizer-dev
+    restart: unless-stopped
     env_file:
       - .env
     ports:
@@ -86,29 +262,21 @@ services:
     volumes:
       - ./data:/javinizer
       - ${MEDIA_PATH:-/path/to/your/jav-library}:/media
-      # Mount frontend source for live development
+      # Mount frontend source for hot-reload via Vite dev server
       - ./web/frontend:/app/web/frontend
     environment:
-      - JAVINIZER_DEV_MODE=${JAVINIZER_DEV_MODE:-true}
-      - VITE_API_URL=${VITE_API_URL:-http://localhost:8080}
-      - JAVINIZER_HOME=/javinizer
-      - JAVINIZER_CONFIG=/javinizer/config.yaml
-      - JAVINIZER_DB=/javinizer/javinizer.db
-      - JAVINIZER_LOG_DIR=/javinizer/logs
-      - JAVINIZER_TEMP_DIR=/javinizer/temp
-      - LOG_LEVEL=${LOG_LEVEL:-debug}
-      - UMASK=${UMASK:-002}
-      - TZ=${TZ:-UTC}
+      <<: *javinizer-env
+      JAVINIZER_DB: /javinizer/javinizer.db
+      JAVINIZER_DB_TYPE: sqlite
+      JAVINIZER_DEV_MODE: "true"
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
+      LOG_LEVEL: ${LOG_LEVEL:-debug}
 
-  # Optional: FlareSolverr for Cloudflare-protected sources (e.g., JavDB/JavLibrary)
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    restart: unless-stopped
-    ports:
-      - "${FLARESOLVERR_HOST_PORT:-8191}:8191"
-    environment:
-      - LOG_LEVEL=${FLARESOLVERR_LOG_LEVEL:-info}
-      - LOG_HTML=${FLARESOLVERR_LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${FLARESOLVERR_CAPTCHA_SOLVER:-none}
-      - TZ=${TZ:-UTC}
+# ==============================================================================
+# Named volumes (only created when the associated profile is active)
+# ==============================================================================
+volumes:
+  postgres_data:
+    driver: local
+  mysql_data:
+    driver: local

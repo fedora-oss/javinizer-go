@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/javinizer/javinizer-go/internal/api/core"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	ws "github.com/javinizer/javinizer-go/internal/websocket"
+	"github.com/fedora-oss/javinizer-go/internal/api/core"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	ws "github.com/fedora-oss/javinizer-go/internal/websocket"
 )
 
 // handleWebSocket handles WebSocket connections for real-time progress updates

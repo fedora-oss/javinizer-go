@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 // TestActressFullName tests the Actress.FullName() method

@@ -5,7 +5,7 @@
 package mocks
 
 import (
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	mock "github.com/stretchr/testify/mock"
 	"gorm.io/gorm"
 )

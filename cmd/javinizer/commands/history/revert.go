@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/commandutil"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	historypkg "github.com/javinizer/javinizer-go/internal/history"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/commandutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	historypkg "github.com/fedora-oss/javinizer-go/internal/history"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 )

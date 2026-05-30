@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/javinizer/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/httpclient"
 )
 
 const maxTranslationAPIResponseSize = 10 * 1024 * 1024 // 10MB

@@ -3,7 +3,7 @@ package template
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 	"github.com/stretchr/testify/assert"
 )
 

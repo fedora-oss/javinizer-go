@@ -3,15 +3,15 @@ package batch
 import (
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/organizer"
-	"github.com/javinizer/javinizer-go/internal/scanner"
-	"github.com/javinizer/javinizer-go/internal/template"
-	"github.com/javinizer/javinizer-go/internal/types"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/organizer"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/types"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/spf13/afero"
 )
 

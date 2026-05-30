@@ -71,7 +71,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/cmd/javinizer/commands/scrape"
+	"github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/scrape"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

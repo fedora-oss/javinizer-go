@@ -5,7 +5,7 @@ package core
 import (
 	"os"
 
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
 )
 
 // fileIdentity represents a unique file identifier (empty on unsupported platforms)

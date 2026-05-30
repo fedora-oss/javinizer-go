@@ -4,9 +4,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	tuicmd "github.com/javinizer/javinizer-go/cmd/javinizer/commands/tui"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/scanner"
+	tuicmd "github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/tui"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
 	"github.com/stretchr/testify/assert"
 )
 

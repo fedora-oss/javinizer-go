@@ -8,7 +8,7 @@ package testutil
 import (
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // MovieBuilder constructs Movie test entities using the builder pattern with fluent API.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/template"
 	"github.com/stretchr/testify/assert"
 )
 

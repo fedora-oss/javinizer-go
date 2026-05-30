@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/scraper/image/placeholder"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/scraper/image/placeholder"
 )
 
 var DefaultPlaceholderHashes = placeholder.DefaultDMMPlaceholderHashes

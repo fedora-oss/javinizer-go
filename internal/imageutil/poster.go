@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/httpclient"
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 const (

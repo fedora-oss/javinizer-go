@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/downloader"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/nfo"
-	"github.com/javinizer/javinizer-go/internal/organizer"
-	"github.com/javinizer/javinizer-go/internal/scanner"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/downloader"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/nfo"
+	"github.com/fedora-oss/javinizer-go/internal/organizer"
+	"github.com/fedora-oss/javinizer-go/internal/scanner"
 )
 
 // MediaDownloader defines the interface for downloading media files.

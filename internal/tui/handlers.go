@@ -1,7 +1,7 @@
 package tui
 
 import (
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 // HandleProgressUpdate updates task progress state based on a progress message.

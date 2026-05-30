@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/scraperutil"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/scraperutil"
 )
 
 type ScraperConstructor func(config.ScraperSettings, *database.DB, *config.ScrapersConfig) (models.Scraper, error)

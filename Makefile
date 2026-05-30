@@ -85,16 +85,16 @@ BUILD_DATE := $(shell date -u '+%Y-%m-%dT%H:%M:%SZ')
 
 # Build flags
 LDFLAGS := -ldflags "\
-	-X github.com/javinizer/javinizer-go/internal/version.Version=$(VERSION) \
-	-X github.com/javinizer/javinizer-go/internal/version.Commit=$(COMMIT) \
-	-X github.com/javinizer/javinizer-go/internal/version.BuildDate=$(BUILD_DATE)"
+	-X github.com/fedora-oss/javinizer-go/internal/version.Version=$(VERSION) \
+	-X github.com/fedora-oss/javinizer-go/internal/version.Commit=$(COMMIT) \
+	-X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=$(BUILD_DATE)"
 
 # Optimized build flags (strip debug symbols)
 LDFLAGS_RELEASE := -ldflags "\
 	-w -s \
-	-X github.com/javinizer/javinizer-go/internal/version.Version=$(VERSION) \
-	-X github.com/javinizer/javinizer-go/internal/version.Commit=$(COMMIT) \
-	-X github.com/javinizer/javinizer-go/internal/version.BuildDate=$(BUILD_DATE)"
+	-X github.com/fedora-oss/javinizer-go/internal/version.Version=$(VERSION) \
+	-X github.com/fedora-oss/javinizer-go/internal/version.Commit=$(COMMIT) \
+	-X github.com/fedora-oss/javinizer-go/internal/version.BuildDate=$(BUILD_DATE)"
 
 # Build the application (single binary with embedded web UI and version info)
 build: web-build

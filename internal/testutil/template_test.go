@@ -3,8 +3,8 @@ package testutil_test
 import (
 	"testing"
 
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/testutil"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/testutil"
 	"github.com/stretchr/testify/assert"
 )
 

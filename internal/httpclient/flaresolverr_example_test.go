@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/javinizer/javinizer-go/internal/config"
-	httpclient "github.com/javinizer/javinizer-go/internal/httpclient"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	httpclient "github.com/fedora-oss/javinizer-go/internal/httpclient"
 )
 
 // This file demonstrates the FlareSolverr integration pattern for scrapers

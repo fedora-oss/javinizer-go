@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	versioncmd "github.com/javinizer/javinizer-go/cmd/javinizer/commands/version"
-	appversion "github.com/javinizer/javinizer-go/internal/version"
+	versioncmd "github.com/fedora-oss/javinizer-go/cmd/javinizer/commands/version"
+	appversion "github.com/fedora-oss/javinizer-go/internal/version"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

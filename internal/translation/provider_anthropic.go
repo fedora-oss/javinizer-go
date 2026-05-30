@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 func (s *Service) translateWithAnthropic(ctx context.Context, sourceLang, targetLang string, texts []string) (*translationResult, error) {

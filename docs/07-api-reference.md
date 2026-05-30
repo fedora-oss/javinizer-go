@@ -18,7 +18,7 @@ The Javinizer REST API provides programmatic access to all metadata scraping, fi
 docker run --rm -p 8080:8080 \
   -v "$(pwd)/data:/javinizer" \
   -v "/path/to/media:/media" \
-  ghcr.io/javinizer/javinizer-go:latest
+  ghcr.io/fedora-oss/javinizer-go:latest
 ```
 
 **Using CLI:**

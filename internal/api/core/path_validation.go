@@ -6,8 +6,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/javinizer/javinizer-go/internal/api/apperrors"
-	"github.com/javinizer/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/api/apperrors"
+	"github.com/fedora-oss/javinizer-go/internal/config"
 )
 
 // validateScanPath validates and sanitizes user-provided paths for scanning.

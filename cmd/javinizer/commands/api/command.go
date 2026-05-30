@@ -7,33 +7,33 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/javinizer/javinizer-go/internal/aggregator"
-	apiauth "github.com/javinizer/javinizer-go/internal/api/auth"
-	apicore "github.com/javinizer/javinizer-go/internal/api/core"
-	apiserver "github.com/javinizer/javinizer-go/internal/api/server"
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/database"
-	"github.com/javinizer/javinizer-go/internal/eventlog"
-	"github.com/javinizer/javinizer-go/internal/history"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/matcher"
-	"github.com/javinizer/javinizer-go/internal/models"
-	"github.com/javinizer/javinizer-go/internal/scraper"
-	"github.com/javinizer/javinizer-go/internal/template"
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/aggregator"
+	apiauth "github.com/fedora-oss/javinizer-go/internal/api/auth"
+	apicore "github.com/fedora-oss/javinizer-go/internal/api/core"
+	apiserver "github.com/fedora-oss/javinizer-go/internal/api/server"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/database"
+	"github.com/fedora-oss/javinizer-go/internal/eventlog"
+	"github.com/fedora-oss/javinizer-go/internal/history"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/matcher"
+	"github.com/fedora-oss/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/scraper"
+	"github.com/fedora-oss/javinizer-go/internal/template"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 
-	_ "github.com/javinizer/javinizer-go/docs/swagger" // Import generated docs
+	_ "github.com/fedora-oss/javinizer-go/docs/swagger" // Import generated docs
 )
 
 // @title Javinizer API
 // @version 1.0
 // @description REST API for JAV metadata scraping and file organization
-// @termsOfService https://github.com/javinizer/javinizer-go
+// @termsOfService https://github.com/fedora-oss/javinizer-go
 
 // @contact.name API Support
-// @contact.url https://github.com/javinizer/javinizer-go/issues
+// @contact.url https://github.com/fedora-oss/javinizer-go/issues
 
 // @license.name MIT
 // @license.url https://opensource.org/licenses/MIT

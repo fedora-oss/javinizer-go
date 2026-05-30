@@ -3,7 +3,7 @@ package batch
 import (
 	"os"
 
-	"github.com/javinizer/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
 )
 
 func cleanupPosterPaths(paths []string) {

@@ -3,7 +3,7 @@ package tui
 import (
 	"time"
 
-	"github.com/javinizer/javinizer-go/internal/worker"
+	"github.com/fedora-oss/javinizer-go/internal/worker"
 )
 
 // Message types for Bubble Tea

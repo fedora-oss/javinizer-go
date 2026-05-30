@@ -2467,12 +2467,12 @@ host: localhost:8080
 info:
   contact:
     name: API Support
-    url: https://github.com/javinizer/javinizer-go/issues
+    url: https://github.com/fedora-oss/javinizer-go/issues
   description: REST API for JAV metadata scraping and file organization
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  termsOfService: https://github.com/javinizer/javinizer-go
+  termsOfService: https://github.com/fedora-oss/javinizer-go
   title: Javinizer API
   version: "1.0"
 paths:

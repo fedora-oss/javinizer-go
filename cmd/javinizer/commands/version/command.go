@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	"github.com/javinizer/javinizer-go/internal/update"
-	"github.com/javinizer/javinizer-go/internal/version"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	"github.com/fedora-oss/javinizer-go/internal/update"
+	"github.com/fedora-oss/javinizer-go/internal/version"
 	"github.com/spf13/cobra"
 )
 

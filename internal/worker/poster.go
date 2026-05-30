@@ -12,11 +12,11 @@ import (
 
 	"github.com/spf13/afero"
 
-	"github.com/javinizer/javinizer-go/internal/config"
-	httpclientiface "github.com/javinizer/javinizer-go/internal/httpclient"
-	imageutil "github.com/javinizer/javinizer-go/internal/image"
-	"github.com/javinizer/javinizer-go/internal/logging"
-	"github.com/javinizer/javinizer-go/internal/models"
+	"github.com/fedora-oss/javinizer-go/internal/config"
+	httpclientiface "github.com/fedora-oss/javinizer-go/internal/httpclient"
+	imageutil "github.com/fedora-oss/javinizer-go/internal/image"
+	"github.com/fedora-oss/javinizer-go/internal/logging"
+	"github.com/fedora-oss/javinizer-go/internal/models"
 )
 
 // RefererResolver resolves an effective Referer for a download URL.
